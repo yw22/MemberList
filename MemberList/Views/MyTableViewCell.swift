@@ -9,6 +9,14 @@ import UIKit
 
 class MyTableViewCell: UITableViewCell {
 
+    var member: Member? {
+        didSet {
+            guard var member = member else { return }
+            mainImageView.image = member.memberImage
+            memberNameLabel.text = member.name
+            addressLabel.text = member.address
+        }
+    }
     
     // MARK: - UI구현
     
@@ -47,6 +55,7 @@ class MyTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
         setupStackView()
+        
     }
     
     func setupStackView() {
@@ -70,6 +79,12 @@ class MyTableViewCell: UITableViewCell {
     override func updateConstraints() {
         setConstraints()
         super.updateConstraints()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.mainImageView.clipsToBounds = true
+        self.mainImageView.layer.cornerRadius = self.mainImageView.frame.width / 2
     }
 
     func setConstraints() {
