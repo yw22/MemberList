@@ -15,6 +15,7 @@
 		55FEF5DF2849EB8F00B57EAF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55FEF5DD2849EB8F00B57EAF /* LaunchScreen.storyboard */; };
 		55FEF5EA2849EE8C00B57EAF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FEF5E92849EE8C00B57EAF /* Member.swift */; };
 		55FEF5EC2849F17700B57EAF /* MemberListManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FEF5EB2849F17700B57EAF /* MemberListManage.swift */; };
+		55FEF5EE284A1FD200B57EAF /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FEF5ED284A1FD200B57EAF /* MyTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		55FEF5E02849EB8F00B57EAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55FEF5E92849EE8C00B57EAF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		55FEF5EB2849F17700B57EAF /* MemberListManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberListManage.swift; sourceTree = "<group>"; };
+		55FEF5ED284A1FD200B57EAF /* MyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				55FEF5D82849EB8E00B57EAF /* Main.storyboard */,
+				55FEF5ED284A1FD200B57EAF /* MyTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 				55FEF5EC2849F17700B57EAF /* MemberListManage.swift in Sources */,
 				55FEF5D72849EB8E00B57EAF /* ViewController.swift in Sources */,
 				55FEF5D32849EB8E00B57EAF /* AppDelegate.swift in Sources */,
+				55FEF5EE284A1FD200B57EAF /* MyTableViewCell.swift in Sources */,
 				55FEF5D52849EB8E00B57EAF /* SceneDelegate.swift in Sources */,
 				55FEF5EA2849EE8C00B57EAF /* Member.swift in Sources */,
 			);

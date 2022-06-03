@@ -17,9 +17,36 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
+        setupDatas()
+        setupTableView()
+        setupNaviBar()
+        setupTableViewConstraints()
+    }
+    
+    func setupNaviBar() {
+        
+        //네비게이션 설정 관련
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground() // 불투명으로
+        appearance.backgroundColor = .white
+        navigationController?.navigationBar.tintColor = .systemBlue
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.compactAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        // 네비게이션바 오른쪽 상단 버튼 설정
+//        self.navigationItem.rightBarButtonItem =
+    }
+    
+    func setupTableView() {
         tableView.dataSource = self
         
-        setupTableViewConstraints()
+        tableView.rowHeight = 60
+    }
+    
+    func setupDatas() {
+        memberListManager.makeMembersListDatas() // 서버에서 불러오는것처럼
     }
     
     // 테이블뷰의 오토레이아웃 설정
@@ -40,7 +67,8 @@ final class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return memberListManager.getMembersList().count
+        
     }
     
     
