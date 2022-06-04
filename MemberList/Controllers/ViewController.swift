@@ -14,6 +14,11 @@ final class ViewController: UIViewController {
     
     var memberListManager = MemberListManage()
     
+    lazy var plusButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(plusButtonTapped))
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,7 +47,7 @@ final class ViewController: UIViewController {
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
         // 네비게이션바 오른쪽 상단 버튼 설정
-//        self.navigationItem.rightBarButtonItem =
+        self.navigationItem.rightBarButtonItem = self.plusButton
     }
     
     func setupTableView() {
@@ -71,6 +76,11 @@ final class ViewController: UIViewController {
         ])
     }
     
+    @objc func plusButtonTapped() {
+        let detailVC = DetailViewController()
+        
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 
 }
 
