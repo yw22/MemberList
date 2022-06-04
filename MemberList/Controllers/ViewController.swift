@@ -24,6 +24,12 @@ final class ViewController: UIViewController {
         setupTableViewConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
     func setupNaviBar() {
         
         //네비게이션 설정 관련
