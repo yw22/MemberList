@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 final class DetailViewController: UIViewController {
     
@@ -17,22 +18,48 @@ final class DetailViewController: UIViewController {
         view = detailView
     }
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupData()
         seteupButtonAction()
-        
+        setupTapGestures()
     }
     
     private func setupData() {
         detailView.member = member
     }
-
+    
     func seteupButtonAction() {
         detailView.saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
     }
+    
+    
+    // MARK: - 이미지뷰가 눌렸을때의 동작 설정
+    
+    // 제스처 설정
+    func setupTapGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(touchUPImageView))
+        detailView.mainImageVeiw.addGestureRecognizer(tapGesture)
+        detailView.mainImageVeiw.isUserInteractionEnabled = true
+    }
+    
+    // 이미지뷰 터치시
+    @objc func touchUPImageView(){
+        // 기본설정 셋팅
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 0
+        configuration.filter = .any(of: [.images, .videos])
+        
+        // 기본설정을 가지고, 피커뷰컨트롤러 생성
+        let picker = PHPickerViewController(configuration: configuration)
+        // 피커뷰 컨트롤러의 대리자 설정
+        picker.delegate = self
+        // 피커뷰 보여주기
+        self.present(picker, animated: true, completion: nil)
+    }
+    
     
     @objc func saveButtonTapped() {
         if member == nil {
@@ -55,7 +82,7 @@ final class DetailViewController: UIViewController {
             
             // 2) 델리게이트 방식으로 구현
             
-        // 멤버가 있다면
+            // 멤버가 있다면
         } else {
             // 이미지뷰에 있는 것을 그대로 다시 멤버에 저장
             member!.memberImage = detailView.mainImageVeiw.image
@@ -79,10 +106,33 @@ final class DetailViewController: UIViewController {
             // 2) 델리게이트 방식
             //delegate?.update(index: memberId, member!)
         }
-     
+        
         // 전 화면으로 돌아가기
         self.navigationController?.popViewController(animated: true)
         
     }
+    
+}
 
+extension DetailViewController: PHPickerViewControllerDelegate {
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        // 피커뷰 dismiss
+        
+        picker.dismiss(animated: true)
+        
+        let itemProvider = results.first?.itemProvider
+        
+        if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
+                DispatchQueue.main.async {
+                    // 이미지뷰에 표시
+                    self.detailView.mainImageVeiw.image = image as? UIImage
+                }
+            }
+        } else {
+            print("이미지 없음")
+        }
+    }
+    
 }

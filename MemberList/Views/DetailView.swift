@@ -286,8 +286,6 @@ class DetailView: UIView {
             stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20)
         ])
-        
-        
     }
 }
 
