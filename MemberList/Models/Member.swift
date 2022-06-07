@@ -5,8 +5,14 @@
 //  Created by 김영욱 on 2022/06/03.
 //
 
-import Foundation
 import UIKit
+
+
+protocol MemberDelegate: AnyObject { // 클래스에서만 선언가능
+    func addNewMember(_ member: Member)
+    func update(index: Int, _ member: Member)
+}
+
 
 struct Member {
     

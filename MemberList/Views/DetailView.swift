@@ -251,7 +251,7 @@ class DetailView: UIView {
     
     func setupStackView() {
         self.addSubview(stackView)
-    }
+    } 
     
     func setupNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(moveUpAction), name: UIResponder.keyboardWillShowNotification, object: nil)

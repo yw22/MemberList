@@ -28,12 +28,12 @@ final class ViewController: UIViewController {
         setupNaviBar()
         setupTableViewConstraints()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        tableView.reloadData()
-    }
+    // 델리게이트 패턴사용시 미리 사용됨
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        tableView.reloadData()
+//    }
     
     func setupNaviBar() {
         
@@ -111,10 +111,10 @@ extension ViewController: UITableViewDelegate {
         
         // 다음화면으로 넘어가는 코드
         let detailVC = DetailViewController()
+        detailVC.delegate = self
         
         let array = memberListManager.getMembersList()
         detailVC.member = array[indexPath.row]
-        
         
         navigationController?.pushViewController(detailVC, animated: true)
         
@@ -122,4 +122,16 @@ extension ViewController: UITableViewDelegate {
     }
     
     
+}
+
+extension ViewController: MemberDelegate {
+    func addNewMember(_ member: Member) {
+        memberListManager.makeNewMember(member)
+        tableView.reloadData()
+    }
+    
+    func update(index: Int, _ member: Member) {
+        memberListManager.updateMemberInfo(index: index, member)
+        tableView.reloadData()
+    }
 }

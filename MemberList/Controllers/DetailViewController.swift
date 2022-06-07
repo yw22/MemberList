@@ -14,6 +14,8 @@ final class DetailViewController: UIViewController {
     
     var member: Member?
     
+    weak var delegate: MemberDelegate?
+    
     override func loadView() {
         view = detailView
     }
@@ -74,15 +76,16 @@ final class DetailViewController: UIViewController {
             newMember.memberImage = detailView.mainImageVeiw.image
             
             // 1) 델리게이트 방식이 아닌 구현
-            let index = navigationController!.viewControllers.count - 2
-            // 전 화면에 접근하기 위함
-            let vc = navigationController?.viewControllers[index] as! ViewController
-            // 전화면의 모델에 접근해서 멤버를 추가
-            vc.memberListManager.makeNewMember(newMember)
-            
+//            let index = navigationController!.viewControllers.count - 2
+//            // 전 화면에 접근하기 위함
+//            let vc = navigationController?.viewControllers[index] as! ViewController
+//            // 전화면의 모델에 접근해서 멤버를 추가
+//            vc.memberListManager.makeNewMember(newMember)
+//
             // 2) 델리게이트 방식으로 구현
+            delegate?.addNewMember(newMember)
             
-            // 멤버가 있다면
+        // 멤버가 있다면
         } else {
             // 이미지뷰에 있는 것을 그대로 다시 멤버에 저장
             member!.memberImage = detailView.mainImageVeiw.image
@@ -97,14 +100,14 @@ final class DetailViewController: UIViewController {
             detailView.member = member
             
             // 1) 델리게이트 방식이 아닌 구현
-            let index = navigationController!.viewControllers.count - 2
-            // 전 화면에 접근하기 위함
-            let vc = navigationController?.viewControllers[index] as! ViewController
-            // 전화면의 모델에 접근해서 멤버를 추가
-            vc.memberListManager.updateMemberInfo(index: memberId, member!)
-            
+//            let index = navigationController!.viewControllers.count - 2
+//            // 전 화면에 접근하기 위함
+//            let vc = navigationController?.viewControllers[index] as! ViewController
+//            // 전화면의 모델에 접근해서 멤버를 추가
+//            vc.memberListManager.updateMemberInfo(index: memberId, member!)
+//
             // 2) 델리게이트 방식
-            //delegate?.update(index: memberId, member!)
+            delegate?.update(index: memberId, member!)
         }
         
         // 전 화면으로 돌아가기
